@@ -36,5 +36,6 @@
 - (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 
 - (NSDictionary *)fetchDictionary;
+- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block;
 
 @end

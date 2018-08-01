@@ -31,5 +31,6 @@
 - (NSUInteger)count;
 
 - (NSSet *)fetchSet;
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block;
 
 @end

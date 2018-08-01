@@ -157,4 +157,16 @@
     return set;
 }
 
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block {
+    
+    if (!block) return;
+    [_lock lock];
+    BOOL _stop = NO;
+    for (id obj in _set) {
+        block(obj, &_stop);
+        if (_stop) break;
+    }
+    [_lock unlock];
+}
+
 @end

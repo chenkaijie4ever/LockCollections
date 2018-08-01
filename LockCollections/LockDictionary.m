@@ -205,4 +205,19 @@
     return dict;
 }
 
+- (void)enumerateKeysAndObjectsUsingBlock:(void (^)(id key, id obj, BOOL *stop))block {
+    
+    if (!block) return;
+    [_lock lock];
+    BOOL _stop = NO;
+    NSArray *allKeys = [self allKeys];
+    for (int i = 0; i < allKeys.count; i++) {
+        id key = [allKeys objectAtIndex:i];
+        id value = [_dict objectForKey:key];
+        block(key, value, &_stop);
+        if (_stop) break;
+    }
+    [_lock unlock];
+}
+
 @end

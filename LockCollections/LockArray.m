@@ -235,4 +235,17 @@
     return array;
 }
 
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
+    
+    if (!block) return;
+    [_lock lock];
+    BOOL _stop = NO;
+    for (int i = 0; i < _array.count; i++) {
+        id obj = [_array objectAtIndex:i];
+        block(obj, i, &_stop);
+        if (_stop) break;
+    }
+    [_lock unlock];
+}
+
 @end
